@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/output_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/x"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Valor digitado para X"
+            android:textAlignment="textEnd"
+            />
+        <TextView
+            android:id="@+id/operator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="+"
+            android:textAlignment="textStart"
+            />
+        <TextView
+            android:id="@+id/y"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Valor digitado para Y"
+            android:textAlignment="textEnd"
+            />
+        <TextView
+            android:id="@+id/resultado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Resultado: Y"
+            android:textAlignment="textStart"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <GridView
+                android:id="@+id/grid_numbers"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:numColumns="3"
+                tools:listitem="@layout/number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/grid_operators"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_weight="5"
+                />
+            <GridView
+                android:id="@+id/grid_operators"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:numColumns="1"
+                tools:listitem="@layout/operator"
+                app:layout_constraintStart_toEndOf="@id/grid_numbers"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBaseline_toBaselineOf="@id/grid_numbers"
+                app:layout_constraintHorizontal_weight="1"
+                />
+            <Button
+                android:id="@+id/result_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="="
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toBottomOf="@id/grid_operators"
+                app:layout_constraintStart_toEndOf="@id/grid_numbers"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
