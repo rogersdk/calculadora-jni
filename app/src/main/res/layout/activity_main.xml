@@ -66,28 +66,58 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintHorizontal_weight="5"
                 />
-            <GridView
+            <LinearLayout
                 android:id="@+id/grid_operators"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:numColumns="1"
-                tools:listitem="@layout/operator"
+                android:orientation="vertical"
                 app:layout_constraintStart_toEndOf="@id/grid_numbers"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBaseline_toBaselineOf="@id/grid_numbers"
-                app:layout_constraintHorizontal_weight="1"
-                />
-            <Button
-                android:id="@+id/result_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="="
-                android:background="@android:color/transparent"
-                app:layout_constraintTop_toBottomOf="@id/grid_operators"
-                app:layout_constraintStart_toEndOf="@id/grid_numbers"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintHorizontal_weight="1">
+                <Button
+                    android:id="@+id/btn_sum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/material_on_background_emphasis_medium"
+                    />
+                <Button
+                    android:id="@+id/btn_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/material_on_background_emphasis_medium"
+                    />
+                <Button
+                    android:id="@+id/btn_divide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="÷"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/material_on_background_emphasis_medium"
+                    />
+                <Button
+                    android:id="@+id/btn_multiply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="x"
+                    android:textAllCaps="false"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/material_on_background_emphasis_medium"
+                    />
+                <Button
+                    android:id="@+id/btn_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="="
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/material_on_background_emphasis_medium"
+                    />
 
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

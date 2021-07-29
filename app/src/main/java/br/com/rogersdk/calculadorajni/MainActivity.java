@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
@@ -35,7 +36,13 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
         GridView numbersGridView = binding.gridNumbers;
-        GridView operatorsGridView = binding.gridOperators;
+//        GridView operatorsGridView = binding.gridOperators;
+
+        Button sumButton = binding.btnSum;
+        Button minusButton = binding.btnMinus;
+        Button divideButton = binding.btnDivide;
+        Button multiplyButton = binding.btnMultiply;
+        Button resultButton = binding.btnResult;
 
         OperacaoTO operacaoTO = new OperacaoTO();
 
@@ -43,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         TextView yTextView = binding.y;
         TextView operatorTextView = binding.operator;
         TextView resultadoTextView = binding.resultado;
-        final boolean typingX = true;
 
         numbersGridView.setAdapter(new NumberAdapter(Arrays.asList("7", "8", "9", "4", "5", "6", "1", "2", "3", "", "0", "")));
 
@@ -57,14 +63,131 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     yTextView.setText(yTextView.getText().toString() + value);
                 }
+            }
+        });
+        
+        sumButton.setOnClickListener(new View.OnClickListener() {
+            int x = 0;
 
+            @Override
+            public void onClick(View view) {
+                operacaoTO.setOperador(TipoOperacao.SUM);
 
+                try {
+                    x = Integer.parseInt(xTextView.getText().toString());
+                } catch (NumberFormatException nfe) {
+                    Log.w("MainActivity", String.format("valor X invalido, utilizando 0") );
+                }
+
+                operacaoTO.setX(x);
+                operatorTextView.setText(operacaoTO.getOperador().getDescricao());
             }
         });
 
-        operatorsGridView.setAdapter(new NumberAdapter(Arrays.asList("+", "-", "÷", "x", "=")));
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            int x = 0;
 
-        operatorsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onClick(View view) {
+                operacaoTO.setOperador(TipoOperacao.MINUS);
+
+                try {
+                    x = Integer.parseInt(xTextView.getText().toString());
+                } catch (NumberFormatException nfe) {
+                    Log.w("MainActivity", String.format("valor X invalido, utilizando 0") );
+                }
+
+                operacaoTO.setX(x);
+                operatorTextView.setText(operacaoTO.getOperador().getDescricao());
+            }
+        });
+
+        divideButton.setOnClickListener(new View.OnClickListener() {
+            int x = 0;
+
+            @Override
+            public void onClick(View view) {
+                operacaoTO.setOperador(TipoOperacao.DIVIDE);
+
+                try {
+                    x = Integer.parseInt(xTextView.getText().toString());
+                } catch (NumberFormatException nfe) {
+                    Log.w("MainActivity", String.format("valor X invalido, utilizando 0") );
+                }
+
+                operacaoTO.setX(x);
+                operatorTextView.setText(operacaoTO.getOperador().getDescricao());
+            }
+        });
+
+        multiplyButton.setOnClickListener(new View.OnClickListener() {
+            int x = 0;
+
+            @Override
+            public void onClick(View view) {
+                operacaoTO.setOperador(TipoOperacao.MULTIPLY);
+
+                try {
+                    x = Integer.parseInt(xTextView.getText().toString());
+                } catch (NumberFormatException nfe) {
+                    Log.w("MainActivity", String.format("valor X invalido, utilizando 0") );
+                }
+
+                operacaoTO.setX(x);
+                operatorTextView.setText(operacaoTO.getOperador().getDescricao());
+            }
+        });
+
+        resultButton.setOnClickListener(new View.OnClickListener() {
+            int x = 0, y = 0;
+
+            @Override
+            public void onClick(View view) {
+                try {
+                    x = Integer.parseInt(xTextView.getText().toString());
+                } catch (NumberFormatException nfe) {
+                    Log.w("MainActivity", String.format("valor X invalido, utilizando 0") );
+                }
+
+                try {
+                    y = Integer.parseInt(yTextView.getText().toString());
+                } catch (NumberFormatException nfe) {
+                    Log.w("MainActivity", String.format("valor Y invalido, utilizando 0") );
+                }
+
+                operacaoTO.setY(x);
+
+                switch (operacaoTO.getOperador()) {
+                    case SUM:
+                        operacaoTO.setResultado(sum(x,y));
+                        break;
+                    case MINUS:
+                        operacaoTO.setResultado(minus(x,y));
+                        break;
+                    case DIVIDE:
+                        operacaoTO.setResultado(divide(x,y));
+                        break;
+                    case MULTIPLY:
+                        operacaoTO.setResultado(multiply(x,y));
+                        break;
+                }
+
+                resultadoTextView.setText(String.valueOf(operacaoTO.getResultado()));
+
+                operacaoTO.setX(0);
+                operacaoTO.setY(0);
+                operacaoTO.setResultado(0);
+                operacaoTO.setOperador(null);
+
+                xTextView.setText("");
+                yTextView.setText("");
+                operatorTextView.setText("");
+            }
+        });
+
+//        operatorsGridView.setAdapter(new NumberAdapter(Arrays.asList("+", "-", "÷", "x", "=")));
+
+        /*operatorsGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 String value = (String) operatorsGridView.getItemAtPosition(position);
@@ -118,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
 
                 operatorTextView.setText(value);
             }
-        });
+        });*/
 
         setContentView(binding.getRoot());
     }

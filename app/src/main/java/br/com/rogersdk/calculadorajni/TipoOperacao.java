@@ -3,7 +3,7 @@ package br.com.rogersdk.calculadorajni;
 import java.util.Arrays;
 
 public enum TipoOperacao {
-    SUM("+"), MINUS("-"), DIVIDE(""), MULTIPLY("x");
+    SUM("+"), MINUS("-"), DIVIDE("÷"), MULTIPLY("x");
 
     String descricao;
 

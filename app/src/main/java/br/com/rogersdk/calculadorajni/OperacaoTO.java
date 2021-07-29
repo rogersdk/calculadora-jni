@@ -4,6 +4,7 @@ public class OperacaoTO {
     private int x;
     private int y;
     private TipoOperacao operador;
+    private int resultado;
 
     public OperacaoTO() {
     }
@@ -30,6 +31,14 @@ public class OperacaoTO {
 
     public void setOperador(TipoOperacao operador) {
         this.operador = operador;
+    }
+
+    public int getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(int resultado) {
+        this.resultado = resultado;
     }
 
     @Override
